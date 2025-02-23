@@ -44,12 +44,10 @@ namespace Demo
                 throw new ArgumentException("Invalid exam type", nameof(type));
             }
         }
-
         public int CompareTo(Subject? other)
         {
             return SubjectId.CompareTo(other?.SubjectId ?? 0);
         }
-
         public override string ToString()
         {
             return $"Subject: {SubjectName} (ID: {SubjectId})";

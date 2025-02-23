@@ -9,7 +9,7 @@ namespace Demo
     class FinalExam : Exam
     {
         #region Constructors
-        
+
         public FinalExam(TimeSpan duration, int questionNum) : base(duration, questionNum)
         {
         }
@@ -17,16 +17,16 @@ namespace Demo
         #endregion
 
         #region Methods
-        
+
         public override object Clone()
         {
             var exam = new FinalExam(Duration, QuestionsNum);
             exam.Questions = Array.ConvertAll(Questions, q => (Question)q.Clone());
             return exam;
         }
-
         public override void ShowExam()
         {
+            Console.Clear();
             Console.WriteLine("\n=== Final Exam ===");
             Console.WriteLine($"Duration: {Duration.TotalMinutes} minutes");
             Console.WriteLine($"Number of questions: {QuestionsNum}\n");
@@ -37,20 +37,9 @@ namespace Demo
                 Questions[i].Display();
                 Console.WriteLine();
             }
-
-            DisplayResults();
+            CollectAnswers();
+            ShowUserResults();
         }
-
-        protected override void DisplayResults()
-        {
-            int total = 0;
-            foreach (var item in Questions)
-            {
-                if (item != null)
-                    total += item.Mark;
-            }
-            Console.WriteLine($"\nTotal marks: {total}");
-        } 
 
         #endregion
 

@@ -32,7 +32,6 @@ namespace Demo
             var correctAnswerIndex = Array.IndexOf(AnswerList, RightAnswer);
             return new MCQQuestion(Header, Body, Mark, answerClone, correctAnswerIndex);
         }
-
         public override void Display()
         {
             Console.WriteLine(ToString());

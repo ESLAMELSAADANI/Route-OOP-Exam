@@ -9,15 +9,25 @@ namespace Demo
 {
     class ExamManage
     {
+        #region Attributes
+        
         private Subject subject;
         private Stopwatch stopwatch;
 
+        #endregion
+
+        #region Constructors
+        
         public ExamManage(Subject subject)
         {
             this.subject = subject;
             this.stopwatch = new Stopwatch();
         }
 
+        #endregion
+
+        #region Methods
+        
         public void CreateQuestions()
         {
             Console.WriteLine($"\nCreating questions for {subject.SubjectName}");
@@ -42,6 +52,7 @@ namespace Demo
                     bool isParsed = false;
                     do
                     {
+                        Console.Beep(800, 200);
                         Console.Write("Enter your choice (1 or 2): ");
                         isParsed = int.TryParse(Console.ReadLine(), out choice);
                     } while (!isParsed || choice < 1 || choice > 2);
@@ -49,6 +60,7 @@ namespace Demo
                 string header;
                 do
                 {
+                    Console.Beep(800, 200);
                     Console.Write("Enter question header: ");
                     header = Console.ReadLine()!;
                 } while (string.IsNullOrWhiteSpace(header));
@@ -56,6 +68,7 @@ namespace Demo
                 string body;
                 do
                 {
+                    Console.Beep(800, 200);
                     Console.Write("Enter question body: ");
                     body = Console.ReadLine()!;
                 } while (string.IsNullOrWhiteSpace(body));
@@ -64,6 +77,7 @@ namespace Demo
                 int mark;
                 do
                 {
+                    Console.Beep(800, 200);
                     Console.Write("Enter question mark: ");
                     isParsed0 = int.TryParse(Console.ReadLine(), out mark);
                 } while (!isParsed0);
@@ -74,6 +88,7 @@ namespace Demo
                     bool correctAnswer;
                     do
                     {
+                        Console.Beep(800, 200);
                         Console.Write("Enter correct answer (true/false): ");
                         isParsed0 = bool.TryParse(Console.ReadLine(), out correctAnswer);
                     } while (!isParsed0);
@@ -85,6 +100,7 @@ namespace Demo
                     int numChoices;
                     do
                     {
+                        Console.Beep(800, 200);
                         Console.Write("Enter number of choices: ");
                         isParsed0 = int.TryParse(Console.ReadLine(), out numChoices);
                     } while (!isParsed0 || numChoices < 2);
@@ -95,6 +111,7 @@ namespace Demo
                         string answerText;
                         do
                         {
+                            Console.Beep(800, 200);
                             Console.Write($"Enter choice {j + 1}: ");
                             answerText = Console.ReadLine()!;
                         } while (string.IsNullOrWhiteSpace(answerText));
@@ -105,18 +122,17 @@ namespace Demo
                     int correctAnswer;
                     do
                     {
+                        Console.Beep(800, 200);
                         Console.Write($"Enter correct answer number (1 to {numChoices}): ");
                         isParsed0 = int.TryParse(Console.ReadLine(), out correctAnswer);
                         if (isParsed0)
                             correctAnswer -= 1;
-                    } while (!isParsed0 || correctAnswer < 1 || correctAnswer >= numChoices);
+                    } while (!isParsed0);
 
                     subject.Exam.Questions[i] = new MCQQuestion(header, body, mark, answers, correctAnswer);
                 }
             }
         }
-
-
         public void CreateExam()
         {
             Console.WriteLine("\nChoose Exam Type:");
@@ -127,6 +143,7 @@ namespace Demo
             int examChoice;
             do
             {
+                Console.Beep(800, 200);
                 Console.Write("Enter your choice (1 or 2): ");
                 isParsed = int.TryParse(Console.ReadLine(), out examChoice);
             } while (!isParsed || examChoice != 1 && examChoice != 2);
@@ -136,6 +153,7 @@ namespace Demo
             int durationMinutes;
             do
             {
+                Console.Beep(800, 200);
                 Console.Write("\nEnter exam duration in minutes: ");
                 isParsed = int.TryParse(Console.ReadLine(), out durationMinutes);
             } while (!isParsed || durationMinutes <= 0);
@@ -144,16 +162,17 @@ namespace Demo
             int QuestionsNum;
             do
             {
+                Console.Beep(800, 200);
                 Console.Write("Enter number of questions: ");
                 isParsed = int.TryParse(Console.ReadLine(), out QuestionsNum);
             } while (!isParsed || QuestionsNum <= 0);
 
             subject.CreateExam(examType, TimeSpan.FromMinutes(durationMinutes), QuestionsNum);
         }
-
         public void RunExam()
         {
             Console.Clear();
+            Console.Beep(800, 200);
             Console.Write("Do You Want To Start The Exam (y | n): ");
 
             if (char.Parse(Console.ReadLine()!.ToLower()) == 'y')
@@ -163,7 +182,9 @@ namespace Demo
                 stopwatch.Stop();
                 Console.WriteLine($"\nThe Elapsed Time = {stopwatch.Elapsed}");
             }
-        }
+        } 
+
+        #endregion
 
     }
 }
